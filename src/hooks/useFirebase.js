@@ -19,7 +19,7 @@ const useFirebase = () => {
                 setError('');
                 const newUser = { email, displayName: name };
                 setUser(newUser);
-                setUser(email, name, 'POST');
+                saveUser(email, name);
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then((result) => {
@@ -82,8 +82,18 @@ const useFirebase = () => {
             setError(error.message)
         })
             .finally(() => setIsLoading(false));
-    }
-
+    };
+    const saveUser = (email, name) => {
+        const user = { email, name };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then()
+    };
     return {
         loginWithGoogle, registerUser, error, user, loginUser, logout, isLoading
 

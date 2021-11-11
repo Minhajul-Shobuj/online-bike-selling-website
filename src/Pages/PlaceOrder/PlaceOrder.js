@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useParams } from 'react-router';
 import useProducts from '../../hooks/useProducts';
+import useAuth from '../../hooks/useAuth';
 
 const PlaceOrder = () => {
+    const {user}=useAuth();
     const { register, handleSubmit, reset } = useForm();
     const { id } = useParams();
     const [products] = useProducts();
@@ -46,9 +48,9 @@ const PlaceOrder = () => {
                 <form className="orderForm" onSubmit={handleSubmit(onSubmit)}>
                     Product: <input className="ms-3 mt-3" {...register("ProductName", { required: true })} placeholder="please,enter product name" />
                     <br />
-                    Your-Name: <input className="ms-3 mt-3" {...register("name", { required: true, maxLength: 20 })} />
+                    Your-Name: <input className="ms-3 mt-3" {...register("name", { required: true, maxLength: 20 })} defaultValue={user.displayName} />
                     <br />
-                    Your-Email: <input className="ms-3 mt-3" {...register("email")} />
+                    Your-Email: <input className="ms-3 mt-3" {...register("email")} defaultValue={user.email} />
                     <br />
                     Your-City:<input className="ms-3 mt-3" {...register("city", { required: true })} placeholder="please,enter your country" />
                     <br />

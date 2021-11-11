@@ -9,6 +9,7 @@ import Register from './Pages/Login/Register';
 import Navigation from './Pages/Navigation/Navigation';
 import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
 import Products from './Pages/Products/Products';
+import Admin from './Pages/MakeAdmin/MakeAdmin';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
             </Route>
             <Route exact path="/">
               <Home></Home>
+            </Route>
+            <Route exact path="/admin">
+              <Admin></Admin>
             </Route>
             <Route path="/products">
               <Products></Products>

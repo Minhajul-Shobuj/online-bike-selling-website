@@ -11,12 +11,13 @@ const Register = () => {
     const history = useHistory();
 
     const onSubmit = data => {
+        const email=data.email.toLowerCase()
         if (data.password !== data.password2) {
             alert("password didn't match");
             return;
         }
         else {
-            registerUser(data.email, data.password, data.name, history);
+            registerUser(email, data.password, data.name, history);
             reset();
         }
     };
