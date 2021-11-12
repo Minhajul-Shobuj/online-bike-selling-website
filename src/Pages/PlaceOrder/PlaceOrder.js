@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from 'react-router';
 import useProducts from '../../hooks/useProducts';
 import useAuth from '../../hooks/useAuth';
+import Review from '../Review/Review';
 
 const PlaceOrder = () => {
     const {user}=useAuth();
@@ -18,7 +19,6 @@ const PlaceOrder = () => {
     const onSubmit = data => {
         axios.post('https://nameless-wave-90962.herokuapp.com/orders', data)
             .then(function (res) {
-                console.log(res);
                 if (res.data.insertedId) {
                     alert('Order Placed Successfully');
                     reset();
@@ -27,6 +27,7 @@ const PlaceOrder = () => {
     };
 
     return (
+        <div>
         <div className="d-flex row mt-5">
             <div className="col-md-12 col-lg-6" >
                 <div className="card mb-3">
@@ -59,6 +60,9 @@ const PlaceOrder = () => {
                     <input className="ms-3 mt-3" type="submit" placeholder="Place Order" />
                 </form>
             </div>
+        </div>
+
+        <Review></Review>
         </div>
     );
 };

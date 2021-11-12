@@ -1,21 +1,17 @@
-import axios from 'axios';
 import React from 'react';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
 const AddProduct = () => {
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
-        const check = window.confirm('Are you a Admin?');
-        if (check) {
             axios.post('https://nameless-wave-90962.herokuapp.com/bikes', data)
                 .then(function (res) {
-                    console.log(res);
                     if (res.data.insertedId) {
-                        alert('Package Placed Successfully');
+                        alert('Product Placed Successfully');
                         reset();
                     }
                 })
-        }
     };
     return (
         <div>
@@ -30,7 +26,7 @@ const AddProduct = () => {
                         width: '250px', height: '80px'
                     }} className="ms-3 mt-3" type="text" {...register("description", { required: true })} />
                 <br />
-                    <input className="ms-3 mt-3" type="submit" placeholder="Place Order" /> :
+                    <input className="ms-3 mt-3" type="submit" /> :
             </form>
         </div>
     );
