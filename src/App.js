@@ -10,6 +10,7 @@ import Navigation from './Pages/Navigation/Navigation';
 import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
 import Products from './Pages/Products/Products';
 import Admin from './Pages/MakeAdmin/MakeAdmin';
+import AddProduct from './Pages/AddProduct/AddProduct';
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
             <PrivateRoute path="/dashboard">
               <Dashboard></Dashboard>
             </PrivateRoute>
+            <PrivateRoute path="/addProduct">
+              <AddProduct></AddProduct>
+            </PrivateRoute>          
             <Route path="/register">
               <Register></Register>
             </Route>
