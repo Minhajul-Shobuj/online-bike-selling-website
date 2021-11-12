@@ -85,7 +85,7 @@ const useFirebase = () => {
     };
     const saveUser = (email, name) => {
         const user = { email, name };
-        fetch('http://localhost:5000/users', {
+        fetch('http://https://nameless-wave-90962.herokuapp.com/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -16,7 +16,7 @@ const PlaceOrder = () => {
         setProduct(singleproduct);
     }, [products, id]);
     const onSubmit = data => {
-        axios.post('http://localhost:5000/orders', data)
+        axios.post('https://nameless-wave-90962.herokuapp.com/orders', data)
             .then(function (res) {
                 console.log(res);
                 if (res.data.insertedId) {

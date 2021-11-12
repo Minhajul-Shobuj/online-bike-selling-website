@@ -13,7 +13,7 @@ const Dashboard = () => {
             order.email === user.email);
         setmyOrders(myOrders);
     }, [orders, user]);
-    const url=`http://localhost:5000/users/${user.email}`
+    const url=`https://nameless-wave-90962.herokuapp.com/users/${user.email}`
     useEffect(() => {
         fetch(url)
             .then(res => res.json())
@@ -22,7 +22,7 @@ const Dashboard = () => {
     const handleDelete = (id) => {
         const proceed = window.confirm('Are you sure?');
         if (proceed) {
-            const url = `http://localhost:5000/orders/${id}`
+            const url = `https://nameless-wave-90962.herokuapp.com/${id}`
             fetch(url, {
                 method: 'DELETE'
             }).then(res => res.json()).then(data => {

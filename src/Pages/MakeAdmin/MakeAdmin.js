@@ -10,7 +10,7 @@ e.target.value='';
     const handleSubmit = e => {
      const user= {email }
      console.log(user)
-       fetch('http://localhost:5000/users/admin',{
+       fetch('https://nameless-wave-90962.herokuapp.com/users/admin',{
            method:'PUT',
            headers:{
                'content-type':'application/json'
@@ -18,7 +18,6 @@ e.target.value='';
            body:JSON.stringify(user)
        }).then(res=>res.json()).then(data=>{
            if(data.modifiedCount){
-            setEmail('');
             alert('Admin created Successfully');
            }
        })

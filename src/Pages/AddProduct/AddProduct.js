@@ -7,7 +7,7 @@ const AddProduct = () => {
     const onSubmit = data => {
         const check = window.confirm('Are you a Admin?');
         if (check) {
-            axios.post('http://localhost:5000/bikes', data)
+            axios.post('https://nameless-wave-90962.herokuapp.com/bikes', data)
                 .then(function (res) {
                     console.log(res);
                     if (res.data.insertedId) {
