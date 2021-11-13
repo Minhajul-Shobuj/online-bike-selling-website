@@ -37,8 +37,10 @@ const PlaceOrder = () => {
                         </div>
                         <div className="col-md-8">
                             <div className="card-body">
-                                <h5 className="card-title">{product?.name}</h5>
-                                <p className="card-text">sdss</p>
+                                <h5 className="card-title text-bolder">Name: {product?.name}</h5>
+                                <small className="card-title text-bold">Price: ${product?.price}</small><br/>
+                                <small className="card-title">Rating: {product?.rating}</small>
+                                <p className="card-text">Description: {product?.description}</p>
                             </div>
                         </div>
                     </div>

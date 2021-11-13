@@ -10,7 +10,12 @@ import Navigation from './Pages/Navigation/Navigation';
 import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
 import Products from './Pages/Products/Products';
 import Admin from './Pages/MakeAdmin/MakeAdmin';
-// import AddProduct from './Pages/AddProduct/AddProduct';
+import AddProduct from './Pages/AddProduct/AddProduct';
+import ManageProduct from './Pages/ManageProduct/ManageProduct';
+import ManageOrder from './Pages/ManageOrder/ManageOrder';
+import Footer from './Pages/Footer/Footer';
+import About from './Pages/About/About';
+import NotFound from './Pages/NotFound/NotFound'
 
 function App() {
   return (
@@ -25,9 +30,12 @@ function App() {
             <Route exact path="/">
               <Home></Home>
             </Route>
-            <Route exact path="/admin">
-              <Admin></Admin>
+            <Route path="/about">
+              <About></About>
             </Route>
+            <PrivateRoute exact path="/admin">
+              <Admin></Admin>
+            </PrivateRoute>
             <Route path="/products">
               <Products></Products>
             </Route>
@@ -37,16 +45,26 @@ function App() {
             <PrivateRoute path="/dashboard">
               <Dashboard></Dashboard>
             </PrivateRoute>
-            {/* <PrivateRoute path="/addProduct">
+            <PrivateRoute path="/addProduct">
               <AddProduct></AddProduct>
-            </PrivateRoute>           */}
+            </PrivateRoute>          
+            <PrivateRoute path="/manageProduct">
+              <ManageProduct></ManageProduct>
+            </PrivateRoute>          
+            <PrivateRoute path="/manageOrder">
+              <ManageOrder></ManageOrder>
+            </PrivateRoute>          
             <Route path="/register">
               <Register></Register>
             </Route>
             <Route path="/login">
               <Login></Login>
             </Route>
+            <Route path="*">
+              <NotFound></NotFound>
+            </Route>
           </Switch>
+          <Footer></Footer>
         </BrowserRouter>
       </AuthProvider>
     </div>

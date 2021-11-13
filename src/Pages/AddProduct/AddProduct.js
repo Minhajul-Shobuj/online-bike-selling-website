@@ -19,13 +19,15 @@ const AddProduct = () => {
             <form className="orderForm" onSubmit={handleSubmit(onSubmit)}>
                 Name: <input className="ms-3 mt-3" {...register("name", { required: true, maxLength: 20 })} />
                 <br />
-                Img-Link: <input className="ms-3 mt-3" type="text" {...register("img", { required: true })} />
+                Rating: <input className="ms-3 mt-3" type="number" {...register("rating", { min: 1, max: 99, required: true })} />  <br />
+                Price: <input className="ms-3 mt-3" type="number" {...register("price", { required: true })} />
                 <br />
                Description :<input
                     style={{
                         width: '250px', height: '80px'
                     }} className="ms-3 mt-3" type="text" {...register("description", { required: true })} />
                 <br />
+                Img-Link: <input className="ms-3 mt-3" type="text" {...register("img", { required: true })} /> <br/>
                     <input className="ms-3 mt-3" type="submit" /> :
             </form>
         </div>

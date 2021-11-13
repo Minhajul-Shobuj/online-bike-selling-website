@@ -1,5 +1,6 @@
 .cards {
-    height: 500px;
+    height: 585px;
+    border-radius: 10px;
 }
 .cards img{
     height: 200px;

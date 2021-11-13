@@ -1,33 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Spinner } from 'react-bootstrap';
-import { useForm } from "react-hook-form";
 import { useHistory, useLocation } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
-    const { register, handleSubmit, reset } = useForm();
-    const { loginUser, error, isLoading } = useAuth();
+    const { loginUser, error, isLoading,loginWithGoogle } = useAuth();
     const history = useHistory();
     const location = useLocation();
+    const [loginData, setLoginData] = useState({});
 
-    const onSubmit = data => {
-        loginUser(data.email, data.password, location, history);
-        reset();
+    const handleOnBlur = e => {
+        const field = e.target.name;
+        const value = e.target.value;
+        const newLoginData = { ...loginData };
+        newLoginData[field] = value;
+        setLoginData(newLoginData);
     };
+
+    const handleRegister = e => {
+        loginUser( loginData.email,loginData.password, location, history);
+        e.preventDefault();
+    };
+    const handleGoogleLogin = () => {
+        loginWithGoogle( history,location)
+    }
     return (
         <div>
             {isLoading ?
                 <Spinner animation="border" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </Spinner> :
-                <form className="orderForm" onSubmit={handleSubmit(onSubmit)}>
-                    Your-Email: <input className="ms-3 mt-3"  {...register("email")} />
+                <form className="orderForm" onSubmit={handleRegister}>
+                    Your-Email: <input onBlur={handleOnBlur} className="ms-3 mt-3" type="email"  name="email" required/>
                     <br />
-                    Password: <input className="ms-3 mt-3" type="password" {...register("password", { min: 6, max: 8, required: true })} />
+                    Password: <input  onBlur={handleOnBlur} className="ms-3 mt-3" type="password" name="password" required/>
                     <br />
-                    <br />
-                    <input className="ms-3 mt-3" type="submit" placeholder="Place Order" />
+                    <input className="ms-3 mt-3" type="submit" />
                 </form>}
             {!isLoading &&
                 <div>
@@ -35,6 +44,8 @@ const Login = () => {
                     <br />
                     <NavLink to="/register">New user?Register first!!</NavLink>
                 </div>}
+                {!isLoading &&
+                    <button onClick={handleGoogleLogin} className="btn btn-success mt-2 rounded">Register with Google</button>}
         </div>
     );
 };

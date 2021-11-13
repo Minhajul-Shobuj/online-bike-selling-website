@@ -9,16 +9,17 @@ const Navigation = () => {
         <div>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                    <Navbar.Brand className="text-bolder text-success fw-bolder" href="#home">Bike_picker</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link as={Link} to="/home">Home</Nav.Link>
                             <Nav.Link as={Link} to="/products">Products</Nav.Link>
                             <Nav.Link as={Link} to="/about">About</Nav.Link>
+                            <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                         </Nav>
                         <Nav>
-                            <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+    
                             {user?.email &&
                                 <small className="text-warning mt-2 me-2"><span className="text-danger">logged in as:</span> {user.displayName}</small>}
                             {user?.email ?

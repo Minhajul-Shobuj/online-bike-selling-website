@@ -19,42 +19,35 @@ const Dashboard = () => {
             .then(res => res.json())
             .then(data => setAdmin(data.admin))
     }, [user?.email,url]);
-    const handleDelete = (id) => {
-        const proceed = window.confirm('Are you sure?');
-        if (proceed) {
-            const url = `https://nameless-wave-90962.herokuapp.com/${id}`
-            fetch(url, {
-                method: 'DELETE'
-            }).then(res => res.json()).then(data => {
-                if (data.deletedCount) {
-                    alert('successfully removed');
-                    const remaining = myOrders.filter(order => order._id !== id);
-                    setmyOrders(remaining);
-                }
-            });
-        }
-    };
-
     return (
-        <div>
+        <div className="Row col-lg-6 col-md-6 col-md-12 d-flex">
+            {admin &&
+                   <div className="col card d-flex align-items-center justify-content-center mt-5">
+                       <ul className="list-group list-group-numbered">
+                        <NavLink to="/admin">
+                    <button className="btn btn-secondary my-2">Make Admin</button>
+                </NavLink>
+                    <NavLink to="/addProduct">
+                    <button className="btn btn-secondary mb-2">Add Product</button>
+                </NavLink>
+                    <NavLink to="/manageProduct">
+                    <button className="btn btn-secondary mb-2">Manage Product</button>
+                </NavLink>
+                </ul>
+                       </div>}
+            <div className="col mt-5">
             <h1 className="text-center">Your Orders</h1>
-            <div className="card d-flex align-items-center justify-content-center mt-5">
+            <NavLink to="/manageOrder">
+            <button className="btn btn-success">Manage Orders</button>
+                </NavLink>
+            <div className="d-flex align-items-center justify-content-center mt-5">
                 <ul className="list-group list-group-numbered">
                     {
                         myOrders.map(order => <li key={order._id} className="list-group-item">{order?.ProductName} <button className="btn btn-warning">pending</button>
-                         <button onClick={() => handleDelete(order._id)} className="btn btn-danger">Remove</button>
                         </li>)
                     }
                 </ul>
-                {admin &&
-                   <div>
-                        <NavLink to="/admin">
-                    <button className="btn btn-success">Make Admin</button>
-                </NavLink>
-                    <NavLink to="/addProduct">
-                    <button className="btn btn-success">Add Product</button>
-                </NavLink>
-                       </div>}
+                </div>
             </div>
         </div>
     );
