@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, Carousel, Col, Row } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import useProducts from '../../hooks/useProducts';
+import image from '../../image/35859.jpg'
 
 const Home = () => {
     const [products] = useProducts();
@@ -100,6 +101,17 @@ const Home = () => {
                     )
                 }
             </Row>
+            </div>
+            <div>
+                <div className="row fw-bolder mx-3 d-flex justify-content-center align-items-center my-3 text-warning">
+                    <p className=" col-lg-6 col-md-6 mx-5 fs-5">“My prince charming doesn’t ride a horse…he rides wheelies.”-Anonymous <br/>
+                    “You don’t stop riding when you get old, you get old when you stop riding.”-Anonymous <br/>
+                    “The only thing better than a street bike.. is a woman riding one.”<br/>
+                    “My first car was a motorcycle.”― Adam Carolla <br/>
+                    “Life is not about waiting for the storms to pass: it’s about learning how to ride in the rain!”
+                    </p>
+                    <img className="col-lg-6 col-md-6" style={{ width: '500px', height: '300px' }} src={image} alt="" />
+                </div>
             </div>
             <div className="container my-5" >
             <h1 className="text-success fw-bolder">Review of some Buyers--</h1>
