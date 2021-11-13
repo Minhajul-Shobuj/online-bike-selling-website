@@ -27,7 +27,7 @@ HTML5,CSS3,REACT-ROUTER,REACT,REACT-BOOTSTRAP,JAVASCRIPT,FIREBASE,BOOTSTRAP,AXIO
 ## Benefit of this app
 
 ```
-You can use this app for any e-commerce businessman;
+You can use this app for any e-commerce business;
 ```
 
 ## Github code link
