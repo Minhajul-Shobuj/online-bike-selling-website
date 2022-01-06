@@ -1,61 +1,62 @@
-import React, { useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
-import { NavLink } from 'react-router-dom';
+import { useForm } from "react-hook-form";
 import useAuth from '../../hooks/useAuth';
+import { Link } from 'react-router-dom';
+import img from '../../image/register-img.svg'
 
 const Register = () => {
-    const { registerUser, error, isLoading,loginWithGoogle,user } = useAuth();
+    const { registerUser, isLoading, loginWithGoogle } = useAuth();
     const history = useHistory();
     const location = useLocation();
-    const [loginData, setLoginData] = useState({});
+    const { register, handleSubmit, reset } = useForm();
 
 
-    const handleOnBlur = e => {
-        const field = e.target.name;
-        const value = e.target.value;
-        const newLoginData = { ...loginData };
-        newLoginData[field] = value;
-        setLoginData(newLoginData);
-    };
-    const handleRegister = e => {
-        if (loginData.password !== loginData.password2) {
-            alert('Your password did not match');
+    const onSubmit = data => {
+        reset();
+        if (data.password !== data.password2) {
+            const alert = document.getElementById("alert")
+            alert.classList.remove("d-none")
             return
         };
-        const email=loginData.email.toLowerCase()
-        registerUser(email, loginData.password, loginData.name, history);
-        e.preventDefault();
+        registerUser(data.email, data.password, data.name, history);
     };
     const handleGoogleSignIn = () => {
-        loginWithGoogle( history,location)
+        loginWithGoogle(history, location)
     }
-   
+
     return (
         <div>
             {isLoading ?
                 <Spinner animation="border" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </Spinner> :
-                <form  onSubmit={handleRegister}> 
-                    Your-Name: <input onBlur={handleOnBlur} className="ms-3 mt-3" type="text"  name="name" required/>
-                    <br />
-                    Your-Email: <input onBlur={handleOnBlur} className="ms-3 mt-3" type="email"  name="email" required/>
-                    <br />
-                    Password: <input  onBlur={handleOnBlur} className="ms-3 mt-3" type="password" name="password" required/>
-                    <br />
-                    Re-Type Pasword: <input onBlur={handleOnBlur} className="ms-3 mt-3" type="password" name="password2" required/>
-                    <br />
-                    <input className="ms-3 mt-3" type="submit" />
-                </form>}
-            {!isLoading &&
-                <div>
-                    <small className="text-danger">{error}</small>
-                    <br />
-                    <NavLink to="/login">Already Registered?Please,Login</NavLink>
+                <div className="login">
+                    <div className="container">
+                        <div className="row align-items-center">
+                            <div className="col-lg-6" data-aos="fade-up">
+                                <div className="login_img">
+                                    <img src={img} alt="" />
+                                </div>
+                            </div>
+                            <div className="col-lg-6" data-aos="fade-up">
+                                <div className="form_container">
+                                    <h2 className="text-center mb-4">Register</h2>
+                                    <form onSubmit={handleSubmit(onSubmit)}>
+                                        <input type="text" {...register("name")} placeholder="Name" />
+                                        <input type="email" {...register("email")} placeholder="Email" />
+                                        <input type="password" {...register("password")} placeholder="Password" />
+                                        <input type="password" {...register("password2")} placeholder="Retype-Password" />
+                                        <input className="btn btn-primary w-25" type="submit" value="Register" />
+                                        <div id="alert" className='text-danger d-none'><h5>Password did't match</h5></div>
+                                        <div><button onClick={handleGoogleSignIn} className="btn btn-success mt-2 rounded">Register with Google</button></div>
+                                        <p className="text-center">Already Register ? <Link to="/login">Please Login</Link></p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>}
-               { !user?.email && !isLoading &&
-               <button onClick={handleGoogleSignIn} className="btn btn-success mt-2 rounded">Register with Google</button>}
         </div>
     );
 };

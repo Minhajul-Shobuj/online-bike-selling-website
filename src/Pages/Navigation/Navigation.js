@@ -19,11 +19,11 @@ const Navigation = () => {
                             <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                         </Nav>
                         <Nav>
-    
+
                             {user?.email &&
                                 <small className="text-warning mt-2 me-2"><span className="text-danger">logged in as:</span> {user.displayName}</small>}
                             {user?.email ?
-                                <button onClick={logout}>logout</button> :
+                                <button className='btn btn-danger' onClick={logout}>logout</button> :
                                 <Nav.Link as={Link} to="/login">Login</Nav.Link>
                             }
                             <Nav.Link as={Link} to="/register">Register</Nav.Link>

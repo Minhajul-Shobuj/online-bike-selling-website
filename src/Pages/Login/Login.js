@@ -1,29 +1,23 @@
 import React, { useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
-import { NavLink } from 'react-router-dom';
+import { useForm } from "react-hook-form";
 import useAuth from '../../hooks/useAuth';
+import './Login.css'
+import { Link } from 'react-router-dom';
+import img from '../../image/login-img.svg'
 
 const Login = () => {
-    const { loginUser, error, isLoading,loginWithGoogle } = useAuth();
+    const { loginUser, isLoading, loginWithGoogle } = useAuth();
+    const { register, handleSubmit, } = useForm();
     const history = useHistory();
     const location = useLocation();
-    const [loginData, setLoginData] = useState({});
 
-    const handleOnBlur = e => {
-        const field = e.target.name;
-        const value = e.target.value;
-        const newLoginData = { ...loginData };
-        newLoginData[field] = value;
-        setLoginData(newLoginData);
-    };
-
-    const handleRegister = e => {
-        loginUser( loginData.email,loginData.password, location, history);
-        e.preventDefault();
+    const onSubmit = data => {
+        loginUser(data.email, data.password, location, history)
     };
     const handleGoogleLogin = () => {
-        loginWithGoogle( history,location)
+        loginWithGoogle(history, location)
     }
     return (
         <div>
@@ -31,21 +25,29 @@ const Login = () => {
                 <Spinner animation="border" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </Spinner> :
-                <form className="orderForm" onSubmit={handleRegister}>
-                    Your-Email: <input onBlur={handleOnBlur} className="ms-3 mt-3" type="email"  name="email" required/>
-                    <br />
-                    Password: <input  onBlur={handleOnBlur} className="ms-3 mt-3" type="password" name="password" required/>
-                    <br />
-                    <input className="ms-3 mt-3" type="submit" />
-                </form>}
-            {!isLoading &&
-                <div>
-                    <small className="text-danger">{error}</small>
-                    <br />
-                    <NavLink to="/register">New user?Register first!!</NavLink>
+                <div className="login">
+                    <div className="container">
+                        <div className="row align-items-center">
+                            <div className="col-lg-6" data-aos="fade-up">
+                                <div className="login_img">
+                                    <img src={img} alt="" />
+                                </div>
+                            </div>
+                            <div className="col-lg-6" data-aos="fade-up">
+                                <div className="form_container">
+                                    <h2 className="text-center mb-4">Login</h2>
+                                    <form onSubmit={handleSubmit(onSubmit)}>
+                                        <input type="email" {...register("email")} placeholder="Email" />
+                                        <input type="password" {...register("password")} placeholder="Password" />
+                                        <input className="btn btn-primary w-25" type="submit" value="Login" />
+                                    </form>
+                                    <div><button onClick={handleGoogleLogin} className="btn btn-success mt-2 rounded">Register with Google</button></div>
+                                    <p className="text-center">New User ? <Link to="/register">Please Register</Link></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>}
-                {!isLoading &&
-                    <button onClick={handleGoogleLogin} className="btn btn-success mt-2 rounded">Register with Google</button>}
         </div>
     );
 };
