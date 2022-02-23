@@ -32,7 +32,7 @@ You can use this app for any e-commerce business;
 
 ## Github code link
 ```
-https://github.com/programming-hero-web-course-4/niche-website-client-side-Minhajul-Shobuj
+https://github.com/Minhajul-Shobuj/online-bike-selling-website
 ```
 
 ## live site link host on FIREBASE
